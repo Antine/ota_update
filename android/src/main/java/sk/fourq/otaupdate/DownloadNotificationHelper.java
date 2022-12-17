@@ -27,8 +27,8 @@ public class DownloadNotificationHelper {
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         String channelId = applicationInfo.packageName;
         builder = new Notification.Builder(context);
-        builder.setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(applicationInfo.name + " Software Updates")
+        builder.setSmallIcon(applicationInfo.icon)
+                .setContentTitle("Software Updates")
                 .setContentText("0%")
                 .setProgress(100, 10, true);
 

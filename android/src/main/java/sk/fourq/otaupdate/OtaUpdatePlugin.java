@@ -202,7 +202,7 @@ public class OtaUpdatePlugin implements FlutterPlugin, ActivityAware, EventChann
     private void executeDownload() {
         try {
             final String destination = context.getExternalFilesDir("/ota_update/" + filename).getAbsoluteFile().toString();
-            Log.d(TAG, "executeDownload: "+destination);
+            Log.d(TAG, "executeDownload: " + destination);
             //String dataDir = context.getApplicationInfo().dataDir + "/files/ota_update";
             //PREPARE URLS
             //final String destination = dataDir + "/" + filename;
@@ -315,7 +315,7 @@ public class OtaUpdatePlugin implements FlutterPlugin, ActivityAware, EventChann
      */
     private void executeInstallation(Uri fileUri, File downloadedFile) {
         File file = new File(downloadedFile.getParentFile(), "app.apk");
-        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Intent intent;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //AUTHORITY NEEDS TO BE THE SAME ALSO IN MANIFEST
             Uri apkUri = FileProvider.getUriForFile(context, androidProviderAuthority, file);
@@ -338,6 +338,7 @@ public class OtaUpdatePlugin implements FlutterPlugin, ActivityAware, EventChann
             progressSink.endOfStream();
             progressSink = null;
         }
+        notification.clearNotification();
     }
 
     /**
